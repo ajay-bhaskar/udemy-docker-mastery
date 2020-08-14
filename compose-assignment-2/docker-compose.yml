@@ -1,1 +1,24 @@
 # create your drupal and postgres config here, based off the last assignment
+version: '2'
+services:
+  drupal:
+    build:
+    image: ajay
+        dockerfile: Dockerfile
+    container_name: drupal
+    ports:
+      - "80:80"
+    volumes:
+      - drupal:/opt/drupal
+  postgres:
+    image: postgres
+    container_name: postgres
+    environment:
+      - POSTGRES_DB=drupal
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=pass
+    volumes:
+      - postgres:/var/lib/postgresql/data
+volumes:
+  drupal:
+  postgres:
