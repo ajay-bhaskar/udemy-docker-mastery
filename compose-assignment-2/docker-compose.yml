@@ -3,22 +3,23 @@ version: '2'
 services:
   drupal:
     build:
-    image: ajay
+        context: .
         dockerfile: Dockerfile
+    image: custom-drupal
     container_name: drupal
     ports:
       - "80:80"
     volumes:
       - drupal:/opt/drupal
   postgres:
-    image: postgres
+    image: postgres:12.1
     container_name: postgres
     environment:
       - POSTGRES_DB=drupal
       - POSTGRES_USER=user
       - POSTGRES_PASSWORD=pass
     volumes:
-      - postgres:/var/lib/postgresql/data
+      - drupal-data:/var/lib/postgresql/data
 volumes:
   drupal:
-  postgres:
+  drupal-data:
